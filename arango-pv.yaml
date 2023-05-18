@@ -1,0 +1,31 @@
+#apiVersion: "storage.arangodb.com/v1alpha"
+#kind: "ArangoLocalStorage"
+#metadata:
+#  name: single-server
+##spec:
+#  storageClass:
+#    name: local-storage
+#  localPath:
+#  - /mnt/big-ssd-disk
+
+---
+apiVersion: "storage.arangodb.com/v1alpha"
+kind: "ArangoLocalStorage"
+metadata:
+  name: "arangodb-local-storage"
+spec:
+  storageClass:
+    name: local-storage
+    isDefault: true
+  localPath:
+    - /var/lib/arango-storage
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - kubework1
+          - kubework
+          - kubmaster
