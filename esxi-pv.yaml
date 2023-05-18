@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: single-server-single
+  annotations:
+    pv.kubernetes.io/provisioned-by: csi.vsphere.vmware.com
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  claimRef:
+    namespace: default
+    name: single-server-single-jv2rtbma
+  csi:
+    driver: csi.vsphere.vmware.com
+    fsType: ext4  # Change fstype to xfs or ntfs based on the requirement.
+    volumeAttributes:
+      type: "vSphere CNS Block Volume"
+    volumeHandle: 6436089c-e08a4aee-4e28-e0d55e0cd6a1  # First Class Disk (Improved Virtual Disk) ID
