@@ -16,6 +16,6 @@ arangodump \
 --overwrite true \
 --all-databases true \
 --server.endpoint tcp://host:8529 \
---server.password password \
+--server.password password
 
 
